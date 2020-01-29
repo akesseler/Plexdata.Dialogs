@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plexdata.Dialogs", "Plexdata.Dialogs\Plexdata.Dialogs.csproj", "{F0236AF6-97D5-4EFE-B106-8C4E696DF1B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plexdata.Dialogs.Wpf", "Plexdata.Dialogs.Wpf\Plexdata.Dialogs.Wpf.csproj", "{F0236AF6-97D5-4EFE-B106-8C4E696DF1B7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "General", "General", "{31927C6B-53F9-462C-B149-495F28641664}"
 	ProjectSection(SolutionItems) = preProject

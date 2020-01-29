@@ -29,15 +29,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Plexdata.Dialogs"
         mc:Ignorable="d"
-        Title="Open Folder" 
-        MinHeight="600" 
-        MaxHeight="600" 
-        MinWidth="450"
-        MaxWidth="450"
-        ResizeMode="NoResize"
-        ShowInTaskbar="False" 
-        WindowStartupLocation="CenterOwner"
-        SizeToContent="WidthAndHeight">
+        Title="Open Folder">
     <DockPanel>
         <Border
             DockPanel.Dock="Bottom"
@@ -45,8 +37,8 @@
             Background="Transparent">
             <Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
-                    <Button Margin="5,0,0,0" Width="70" Content="Open" IsDefault="True" Click="OnDialogButtonClick"/>
-                    <Button Margin="5,0,0,0" Width="70" Content="Cancel" IsCancel="True" Click="OnDialogButtonClick"/>
+                    <Button Margin="5,0,0,0" Width="70" Content="_Open" IsDefault="True" Click="OnDialogButtonClick"/>
+                    <Button Margin="5,0,0,0" Width="70" Content="_Cancel" IsCancel="True" Click="OnDialogButtonClick"/>
                 </StackPanel>
             </Grid>
         </Border>

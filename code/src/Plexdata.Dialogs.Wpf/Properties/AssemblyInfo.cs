@@ -38,7 +38,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("RELEASE")]
 #endif
 [assembly: AssemblyCompany("plexdata.de")]
-[assembly: AssemblyProduct("Plexdata.Dialogs")]
+[assembly: AssemblyProduct("Plexdata.Dialogs.Wpf")]
 [assembly: AssemblyCopyright("Copyright © 2020 - plexdata.de")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
