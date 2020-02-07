@@ -43,14 +43,18 @@
                     </Hyperlink>
                 </TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
-                    <Button Margin="5,0,0,0" Width="70" Visibility="{Binding OkButtonVisibility}" Content="{Binding OkButtonLabel}" Click="OnOkButtonClick" />
-                    <Button Margin="5,0,0,0" Width="70" Visibility="{Binding YesButtonVisibility}" Content="{Binding YesButtonLabel}" Click="OnYesButtonClick" />
-                    <Button Margin="5,0,0,0" Width="70" Visibility="{Binding NoButtonVisibility}" Content="{Binding NoButtonLabel}" Click="OnNoButtonClick" />
-                    <Button Margin="5,0,0,0" Width="70" Visibility="{Binding CloseButtonVisibility}" Content="{Binding CloseButtonLabel}" IsCancel="True" Click="OnCloseButtonClick" />
-                    <Button Margin="5,0,0,0" Width="70" Visibility="{Binding CancelButtonVisibility}" Content="{Binding CancelButtonLabel}" IsCancel="True" Click="OnCancelButtonClick" />
+                    <Button TabIndex="0" Margin="5,0,0,0" Width="70" Visibility="{Binding OkButtonVisibility}"     Content="{Binding OkButtonLabel}"     IsDefault="{Binding OkButtonDefault}"     IsCancel="False" Click="OnOkButtonClick"     />
+                    <Button TabIndex="1" Margin="5,0,0,0" Width="70" Visibility="{Binding YesButtonVisibility}"    Content="{Binding YesButtonLabel}"    IsDefault="{Binding YesButtonDefault}"    IsCancel="False" Click="OnYesButtonClick"    />
+                    <Button TabIndex="2" Margin="5,0,0,0" Width="70" Visibility="{Binding NoButtonVisibility}"     Content="{Binding NoButtonLabel}"     IsDefault="{Binding NoButtonDefault}"     IsCancel="True"  Click="OnNoButtonClick"     />
+                    <Button TabIndex="3" Margin="5,0,0,0" Width="70" Visibility="{Binding CloseButtonVisibility}"  Content="{Binding CloseButtonLabel}"  IsDefault="{Binding CloseButtonDefault}"  IsCancel="True"  Click="OnCloseButtonClick"  />
+                    <Button TabIndex="4" Margin="5,0,0,0" Width="70" Visibility="{Binding CancelButtonVisibility}" Content="{Binding CancelButtonLabel}" IsDefault="{Binding CancelButtonDefault}" IsCancel="True"  Click="OnCancelButtonClick" />
                 </StackPanel>
             </Grid>
         </Border>
+        <ScrollViewer
+            CanContentScroll="True"
+            VerticalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Disabled">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -76,5 +80,6 @@
                 TextWrapping="WrapWithOverflow"
                 Text="{Binding Message, Mode=OneWay}" />
         </Grid>
+        </ScrollViewer>
     </DockPanel>
 </Window>

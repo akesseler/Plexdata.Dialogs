@@ -64,7 +64,16 @@ This is a very long message. This is a very long message. This is a very long me
 This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. 
 ".Replace(Environment.NewLine, String.Empty);
 
-            DialogBox.Show(this, message);
+            //DialogBox.Show(this, message, DialogButton.YesNoCancel | DialogButton.OkClose);
+            //DialogBox.Show(this, message, DialogButton.OkClose);
+            //DialogBox.Show(this, message, DialogButton.YesNoCancel);
+            //DialogBox.Show(this, message, DialogButton.YesNo);
+
+
+
+            //DialogBox.Show(this, message, DialogButton.Ok | DialogButton.No);
+            //DialogBox.Show(this, message, DialogButton.Ok | DialogButton.No | DialogButton.Yes, new DialogOption(DialogButton.Ok, "  _Heimer_ ", false), new DialogOption(DialogButton.No, false), new DialogOption(DialogButton.Yes, true));
+            DialogBox.Show(this, message, DialogSymbol.Exclamation, DialogButton.Ok | /*DialogButton.No | */DialogButton.Yes, DialogOption.DefaultButtonYes, DialogOption.DefaultButtonNo);
         }
 
         private void OnShowOpenFolderDialog(Object sender, RoutedEventArgs args)
@@ -72,7 +81,7 @@ This is a very long message. This is a very long message. This is a very long me
             OpenFolderDialog dialog = new OpenFolderDialog(this)
             {
                 Message = "This is a pretty long message. This is a pretty long message. This is a pretty long message. This is a pretty long message. This is a pretty long message.",
-                InitialPath = @"C:\Windows"
+                InitialPath = @"C:\Users"
             };
 
             if (dialog.ShowDialog() == true)

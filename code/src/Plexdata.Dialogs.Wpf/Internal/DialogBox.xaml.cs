@@ -1,26 +1,26 @@
 ﻿/*
-* MIT License
-* 
-* Copyright (c) 2020 plexdata.de
-* 
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-* SOFTWARE.
-*/
+ * MIT License
+ * 
+ * Copyright (c) 2020 plexdata.de
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
 using Plexdata.Dialogs.Native;
 using System;
@@ -40,7 +40,7 @@ namespace Plexdata.Dialogs.Internal
     {
         #region Private fields
 
-        private readonly Dictionary<DialogButton, String> labels;
+        private readonly IDictionary<DialogButton, String> labels;
 
         #endregion
 
@@ -61,9 +61,10 @@ namespace Plexdata.Dialogs.Internal
             this.Buttons = buttons;
             this.Result = Dialogs.DialogResult.None;
 
-            this.labels = this.CreateLabels();
+            this.labels = DefaultButtonLabels.CreateLabels();
 
             this.ApplyOptions(options);
+            this.ApplyDefaults(options);
 
             this.InitializeComponent();
 
@@ -78,13 +79,29 @@ namespace Plexdata.Dialogs.Internal
 
         #region Public properties
 
-        public String Message { get; private set; }
+        public String Message
+        {
+            get;
+            private set;
+        }
 
-        public DialogButton Buttons { get; private set; }
+        public DialogButton Buttons
+        {
+            get;
+            private set;
+        }
 
-        public BitmapSource Symbol { get; private set; }
+        public BitmapSource Symbol
+        {
+            get;
+            private set;
+        }
 
-        public DialogResult Result { get; private set; }
+        public DialogResult Result
+        {
+            get;
+            private set;
+        }
 
         #endregion
 
@@ -217,8 +234,39 @@ namespace Plexdata.Dialogs.Internal
 
         #endregion
 
+        #region Button defaults
 
+        public Boolean OkButtonDefault
+        {
+            get;
+            private set;
+        }
 
+        public Boolean CloseButtonDefault
+        {
+            get;
+            private set;
+        }
+
+        public Boolean CancelButtonDefault
+        {
+            get;
+            private set;
+        }
+
+        public Boolean YesButtonDefault
+        {
+            get;
+            private set;
+        }
+
+        public Boolean NoButtonDefault
+        {
+            get;
+            private set;
+        }
+
+        #endregion
 
         #region Link labels
 
@@ -356,28 +404,91 @@ namespace Plexdata.Dialogs.Internal
             return Imaging.CreateBitmapSourceFromHIcon(handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         }
 
-        private Dictionary<DialogButton, String> CreateLabels()
-        {
-            return new Dictionary<DialogButton, String>()
-            {
-                { DialogButton.Ok, "_Ok" },
-                { DialogButton.Close, "Cl_ose" },
-                { DialogButton.Cancel, "_Cancel" },
-                { DialogButton.Yes, "_Yes" },
-                { DialogButton.No,"_No" }
-            };
-        }
-
         private void ApplyOptions(DialogOption[] options)
         {
-            if (options is null || !options.Any())
+            if (options is null || options.Length < 1)
             {
                 return;
             }
 
             foreach (DialogOption option in options)
             {
-                this.labels[option.Button] = option.Label;
+                if (!DefaultButtonLabels.IsDefaultButtonLabel(option.Button, option.Label))
+                {
+                    this.labels[option.Button] = option.Label;
+                }
+            }
+        }
+
+        private void ApplyDefaults(DialogOption[] options)
+        {
+            this.OkButtonDefault = false;
+            this.CloseButtonDefault = false;
+            this.CancelButtonDefault = false;
+            this.YesButtonDefault = false;
+            this.NoButtonDefault = false;
+
+            if (options is null || options.Length < 1)
+            {
+                switch (this.Buttons)
+                {
+                    case DialogButton.OkCancel:
+                    case DialogButton.YesNoCancel:
+                        this.CancelButtonDefault = true;
+                        return;
+                    case DialogButton.OkClose:
+                        this.CloseButtonDefault = true;
+                        return;
+                    case DialogButton.YesNo:
+                        this.NoButtonDefault = true;
+                        return;
+                }
+
+                if (this.Buttons.HasFlag(DialogButton.Cancel))
+                {
+                    this.CancelButtonDefault = true;
+                    return;
+                }
+
+                if (this.Buttons.HasFlag(DialogButton.Close))
+                {
+                    this.CloseButtonDefault = true;
+                    return;
+                }
+
+                if (this.Buttons.HasFlag(DialogButton.No))
+                {
+                    this.NoButtonDefault = true;
+                    return;
+                }
+
+                return;
+            }
+
+            DialogOption option = options.Where(x => x.IsDefault).FirstOrDefault();
+
+            if (option is null)
+            {
+                return;
+            }
+
+            switch (option.Button)
+            {
+                case DialogButton.Ok:
+                    this.OkButtonDefault = true;
+                    return;
+                case DialogButton.Yes:
+                    this.YesButtonDefault = true;
+                    return;
+                case DialogButton.No:
+                    this.NoButtonDefault = true;
+                    return;
+                case DialogButton.Close:
+                    this.CloseButtonDefault = true;
+                    return;
+                case DialogButton.Cancel:
+                    this.CancelButtonDefault = true;
+                    return;
             }
         }
 
