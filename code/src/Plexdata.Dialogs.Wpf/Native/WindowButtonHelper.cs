@@ -29,10 +29,27 @@ using System.Windows.Interop;
 
 namespace Plexdata.Dialogs.Native
 {
+    /// <summary>
+    /// The static helper class to allow the modification of the window button 
+    /// `Minimize` and `Maximize`.
+    /// </summary>
     public static class WindowButtonHelper
     {
         #region Public methods
 
+        /// <summary>
+        /// Enables or disables the `Minimize` and `Maximize` buttons for provided 
+        /// window.
+        /// </summary>
+        /// <param name="window">
+        /// The window to modify those buttons for.
+        /// </param>
+        /// <param name="disabled">
+        /// True to disable those buttons and false to enable them.
+        /// </param>
+        /// <returns>
+        /// True it the Win32 API call was successful and false otherwise.
+        /// </returns>
         public static Boolean SetAdditionalButtons(Window window, Boolean disabled)
         {
             if (window is null)
@@ -52,6 +69,18 @@ namespace Plexdata.Dialogs.Native
             }
         }
 
+        /// <summary>
+        /// Enables or disables the `Minimize` button for provided window.
+        /// </summary>
+        /// <param name="window">
+        /// The window to modify this button for.
+        /// </param>
+        /// <param name="disabled">
+        /// True to disable this button and false to enable it.
+        /// </param>
+        /// <returns>
+        /// True it the Win32 API call was successful and false otherwise.
+        /// </returns>
         public static Boolean SetMinimizeButton(Window window, Boolean disabled)
         {
             if (window is null)
@@ -71,6 +100,18 @@ namespace Plexdata.Dialogs.Native
             }
         }
 
+        /// <summary>
+        /// Enables or disables the `Maximize` button for provided window.
+        /// </summary>
+        /// <param name="window">
+        /// The window to modify this button for.
+        /// </param>
+        /// <param name="disabled">
+        /// True to disable this button and false to enable it.
+        /// </param>
+        /// <returns>
+        /// True it the Win32 API call was successful and false otherwise.
+        /// </returns>
         public static Boolean SetMaximizeButton(Window window, Boolean disabled)
         {
             if (window is null)

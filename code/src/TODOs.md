@@ -2,6 +2,5 @@
 
 **TODOs**
 
-- Support additional button settings for `IsCancel`.
-- Support optional button renaming functionality for class `OpenFolderDialog`.
-- Make `OpenFolderDialog` as static like done for `DialogBox`.
+- Support a dialog box that is able to show `Exceptions`.
+- Support an optional button for `renaming` functionality within the `OpenFolderDialog`.

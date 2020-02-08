@@ -26,6 +26,9 @@ using System;
 
 namespace Plexdata.Dialogs
 {
+    /// <summary>
+    /// The set of flags of all possible dialog box buttons.
+    /// </summary>
     [Flags]
     public enum DialogButton
     {

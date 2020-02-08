@@ -24,29 +24,39 @@
 
 namespace Plexdata.Dialogs
 {
+    /// <summary>
+    /// The enumeration of all possible dialog box results.
+    /// </summary>
     public enum DialogResult
     {
-        //
-        // Summary:
-        //     The message box returns no result.
+        /// <summary>
+        /// The message box returns no result.
+        /// </summary>
         None = 0,
-        //
-        // Summary:
-        //     The result value of the message box is OK.
+
+        /// <summary>
+        /// The result value of the message box is OK.
+        /// </summary>
         OK = 1,
 
+        /// <summary>
+        /// The result value of the message box is Close.
+        /// </summary>
         Close = 2,
-        //
-        // Summary:
-        //     The result value of the message box is Cancel.
+
+        /// <summary>
+        /// The result value of the message box is Cancel.
+        /// </summary>
         Cancel = 3,
-        //
-        // Summary:
-        //     The result value of the message box is Yes.
+
+        /// <summary>
+        /// The result value of the message box is Yes.
+        /// </summary>
         Yes = 4,
-        //
-        // Summary:
-        //     The result value of the message box is No.
+
+        /// <summary>
+        /// The result value of the message box is No.
+        /// </summary>
         No = 5
     }
 }

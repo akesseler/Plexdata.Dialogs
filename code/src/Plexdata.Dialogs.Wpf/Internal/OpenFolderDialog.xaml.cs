@@ -32,26 +32,40 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Plexdata.Dialogs
+namespace Plexdata.Dialogs.Internal
 {
     /// <summary>
     /// Interaction logic for OpenFolderDialog.xaml
     /// </summary>
+    /// <remarks>
+    /// This class is intended to be used internally only.
+    /// </remarks>
     public partial class OpenFolderDialog : Window
     {
         #region Private fields
 
-        private String initialPath = null;
+        private DirectoryInfo initialFolder = null;
 
         #endregion
 
         #region Construction
 
-        public OpenFolderDialog()
-            : this(null)
-        { }
-
-        public OpenFolderDialog(Window owner)
+        /// <summary>
+        /// This constructor initialize a new instance of this class.
+        /// </summary>
+        /// <param name="owner">
+        /// The owner of the dialog box.
+        /// </param>
+        /// <param name="message">
+        /// The message to be displayed.
+        /// </param>
+        /// <param name="caption">
+        /// The dialog box caption to be used.
+        /// </param>
+        /// <param name="folder">
+        /// The directory information to be used as initial folder.
+        /// </param>
+        public OpenFolderDialog(Window owner, String message, String caption, DirectoryInfo folder)
             : base()
         {
             Mouse.OverrideCursor = Cursors.AppStarting;
@@ -70,6 +84,10 @@ namespace Plexdata.Dialogs
             base.Width = 450;
 
             this.RootFolders = this.LoadRootFolders();
+            this.Message = this.FixMessage(message);
+            base.Title = this.FixCaption(caption);
+            this.InitialFolder = folder;
+
             base.DataContext = this;
 
             this.folderTreeView.AddHandler(TreeViewItem.ExpandedEvent, new RoutedEventHandler(OnTreeViewItemExpanded));
@@ -81,8 +99,24 @@ namespace Plexdata.Dialogs
 
         #region Public properties
 
-        public ObservableCollection<FolderEntry> RootFolders { get; private set; }
+        /// <summary>
+        /// Gets the list of assigned root folders.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
+        public ObservableCollection<FolderEntry> RootFolders
+        {
+            get;
+            private set;
+        }
 
+        /// <summary>
+        /// Gets the message's visibility state.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Visibility IsMessageVisible
         {
             get
@@ -96,26 +130,47 @@ namespace Plexdata.Dialogs
             }
         }
 
-        public String Message { get; set; }
+        /// <summary>
+        /// Gets and sets the message to be displayed.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
+        public String Message
+        {
+            get;
+            set;
+        }
 
-        public DirectoryInfo SelectedFolder { get; private set; }
+        /// <summary>
+        /// Gets the directory information of selected folder.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
+        public DirectoryInfo SelectedFolder
+        {
+            get;
+            private set;
+        }
 
-        public String InitialPath
+        /// <summary>
+        /// Gets and sets the directory information of initial folder.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
+        public DirectoryInfo InitialFolder
         {
             get
             {
-                return this.initialPath;
+                return this.initialFolder;
             }
             set
             {
-                if (!String.IsNullOrWhiteSpace(value))
+                if (this.initialFolder != value)
                 {
-                    value = value.TrimEnd(Path.DirectorySeparatorChar);
-                }
-
-                if (this.initialPath != value)
-                {
-                    this.initialPath = value;
+                    this.initialFolder = value;
 
                     this.ExpandInitialPath();
                 }
@@ -126,6 +181,12 @@ namespace Plexdata.Dialogs
 
         #region Protected overrides
 
+        /// <summary>
+        /// Raises the content rendered event.
+        /// </summary>
+        /// <param name="args">
+        /// The event arguments containing the event data.
+        /// </param>
         protected override void OnContentRendered(EventArgs args)
         {
             base.OnContentRendered(args);
@@ -135,6 +196,12 @@ namespace Plexdata.Dialogs
             this.folderTreeView.Focus();
         }
 
+        /// <summary>
+        /// Raises the source initialized event.
+        /// </summary>
+        /// <param name="args">
+        /// The event arguments containing the event data.
+        /// </param>
         protected override void OnSourceInitialized(EventArgs args)
         {
             base.OnSourceInitialized(args);
@@ -160,7 +227,7 @@ namespace Plexdata.Dialogs
                     }
                     catch (UnauthorizedAccessException exception)
                     {
-                        DialogBox.Show(this, exception.Message, this.Title, DialogSymbol.Error);
+                        Dialogs.DialogBox.Show(this, exception.Message, this.Title, DialogSymbol.Error);
                     }
                     catch (Exception exception)
                     {
@@ -221,6 +288,21 @@ namespace Plexdata.Dialogs
 
         #region Private methods
 
+        private String FixMessage(String message)
+        {
+            return (message ?? String.Empty).Trim();
+        }
+
+        private String FixCaption(String caption)
+        {
+            if (String.IsNullOrWhiteSpace(caption))
+            {
+                caption = base.Title;
+            }
+
+            return (caption ?? String.Empty).Trim();
+        }
+
         private ObservableCollection<FolderEntry> LoadRootFolders()
         {
             ObservableCollection<FolderEntry> result = new ObservableCollection<FolderEntry>();
@@ -247,10 +329,12 @@ namespace Plexdata.Dialogs
 
         private void ExpandInitialPath()
         {
-            if (!String.IsNullOrWhiteSpace(this.InitialPath))
+            if (this.InitialFolder is null || !this.InitialFolder.Exists)
             {
-                this.ExpandInitialPath(this.InitialPath.Split(Path.DirectorySeparatorChar).ToList(), this.RootFolders, null);
+                return;
             }
+
+            this.ExpandInitialPath(this.InitialFolder.FullName.Split(Path.DirectorySeparatorChar).ToList(), this.RootFolders, null);
         }
 
         private void ExpandInitialPath(List<String> pieces, ObservableCollection<FolderEntry> children, FolderEntry parent)

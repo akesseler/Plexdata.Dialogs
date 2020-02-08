@@ -24,6 +24,9 @@
 
 namespace Plexdata.Dialogs
 {
+    /// <summary>
+    /// The enumeration of all possible dialog box symbols.
+    /// </summary>
     public enum DialogSymbol
     {
         /// <summary>

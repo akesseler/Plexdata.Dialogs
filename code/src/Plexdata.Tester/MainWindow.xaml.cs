@@ -24,6 +24,7 @@
 
 using Plexdata.Dialogs;
 using System;
+using System.IO;
 using System.Windows;
 
 namespace Plexdata.Tester
@@ -33,14 +34,9 @@ namespace Plexdata.Tester
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        #region Privates
 
-        private void OnShowMessageDialog(Object sender, RoutedEventArgs args)
-        {
-            String message = @"
+        private readonly String message = @"
 This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. 
 This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. 
 This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. 
@@ -64,30 +60,57 @@ This is a very long message. This is a very long message. This is a very long me
 This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. 
 ".Replace(Environment.NewLine, String.Empty);
 
-            //DialogBox.Show(this, message, DialogButton.YesNoCancel | DialogButton.OkClose);
-            //DialogBox.Show(this, message, DialogButton.OkClose);
-            //DialogBox.Show(this, message, DialogButton.YesNoCancel);
-            //DialogBox.Show(this, message, DialogButton.YesNo);
+        #endregion
 
-
-
-            //DialogBox.Show(this, message, DialogButton.Ok | DialogButton.No);
-            //DialogBox.Show(this, message, DialogButton.Ok | DialogButton.No | DialogButton.Yes, new DialogOption(DialogButton.Ok, "  _Heimer_ ", false), new DialogOption(DialogButton.No, false), new DialogOption(DialogButton.Yes, true));
-            DialogBox.Show(this, message, DialogSymbol.Exclamation, DialogButton.Ok | /*DialogButton.No | */DialogButton.Yes, DialogOption.DefaultButtonYes, DialogOption.DefaultButtonNo);
+        public MainWindow()
+            : base()
+        {
+            this.InitializeComponent();
         }
 
-        private void OnShowOpenFolderDialog(Object sender, RoutedEventArgs args)
+        private void OnShowDialogBoxSimple(Object sender, RoutedEventArgs args)
         {
-            OpenFolderDialog dialog = new OpenFolderDialog(this)
-            {
-                Message = "This is a pretty long message. This is a pretty long message. This is a pretty long message. This is a pretty long message. This is a pretty long message.",
-                InitialPath = @"C:\Users"
-            };
+            DialogBox.Show(this, message);
+        }
 
-            if (dialog.ShowDialog() == true)
-            {
-                DialogBox.Show(this, dialog.SelectedFolder.FullName);
-            }
+        private void OnShowDialogBoxOkCancel(Object sender, RoutedEventArgs args)
+        {
+            DialogBox.Show(this, message, DialogSymbol.Information, DialogButton.OkCancel);
+        }
+
+        private void OnShowDialogBoxOkCancelOkDefault(Object sender, RoutedEventArgs args)
+        {
+            DialogBox.Show(this, message, DialogSymbol.Warning, DialogButton.OkCancel, DialogOption.DefaultButtonOk);
+        }
+
+        private void OnShowDialogBoxYesNoCancel(Object sender, RoutedEventArgs args)
+        {
+            DialogBox.Show(this, message, DialogSymbol.Question, DialogButton.YesNoCancel);
+        }
+
+        private void OnShowDialogBoxYesNoCancelNoDefault(Object sender, RoutedEventArgs args)
+        {
+            DialogBox.Show(this, message, DialogSymbol.Error, DialogButton.YesNoCancel, DialogOption.DefaultButtonNo);
+        }
+
+        private void OnShowOpenFolderDialogSimple(Object sender, RoutedEventArgs args)
+        {
+            OpenFolderDialog.Show(this);
+        }
+
+        private void OnShowOpenFolderDialogMessage(Object sender, RoutedEventArgs args)
+        {
+            OpenFolderDialog.Show(this, this.message.Substring(0, this.message.Length / 3));
+        }
+
+        private void OnShowOpenFolderDialogFolder(Object sender, RoutedEventArgs args)
+        {
+            OpenFolderDialog.Show(this, new DirectoryInfo(@"C:\Users"));
+        }
+
+        private void OnShowOpenFolderDialogComplex(Object sender, RoutedEventArgs args)
+        {
+            OpenFolderDialog.Show(this, this.message.Substring(0, this.message.Length / 3), "Choose what ever you want!", new DirectoryInfo(@"C:\Users"));
         }
     }
 }

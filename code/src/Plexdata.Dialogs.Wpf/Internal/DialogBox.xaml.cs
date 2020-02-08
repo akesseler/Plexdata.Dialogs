@@ -36,6 +36,9 @@ namespace Plexdata.Dialogs.Internal
     /// <summary>
     /// Interaction logic for DialogBox.xaml
     /// </summary>
+    /// <remarks>
+    /// This class is intended to be used internally only.
+    /// </remarks>
     public partial class DialogBox : Window
     {
         #region Private fields
@@ -46,6 +49,27 @@ namespace Plexdata.Dialogs.Internal
 
         #region Construction
 
+        /// <summary>
+        /// This constructor initialize a new instance of this class.
+        /// </summary>
+        /// <param name="owner">
+        /// The owner of the dialog box.
+        /// </param>
+        /// <param name="message">
+        /// The message to be displayed.
+        /// </param>
+        /// <param name="caption">
+        /// The dialog box caption to be used.
+        /// </param>
+        /// <param name="buttons">
+        /// The set of flags describing the used buttons.
+        /// </param>
+        /// <param name="symbol">
+        /// The dialog box symbol to be shown.
+        /// </param>
+        /// <param name="options">
+        /// The list of additional dialog box options.
+        /// </param>
         public DialogBox(Window owner, String message, String caption, DialogButton buttons, DialogSymbol symbol, DialogOption[] options)
         {
             base.MinHeight = 180;
@@ -79,24 +103,48 @@ namespace Plexdata.Dialogs.Internal
 
         #region Public properties
 
+        /// <summary>
+        /// Gets the message to be displayed.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public String Message
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the buttons to be displayed.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public DialogButton Buttons
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the symbol to be displayed.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public BitmapSource Symbol
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the result of the dialog box.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public DialogResult Result
         {
             get;
@@ -107,6 +155,12 @@ namespace Plexdata.Dialogs.Internal
 
         #region Symbol Visibility
 
+        /// <summary>
+        /// Gets the symbol's visibility state.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Visibility SymbolVisibility
         {
             get
@@ -123,6 +177,12 @@ namespace Plexdata.Dialogs.Internal
 
         #region Button visibility
 
+        /// <summary>
+        /// Gets the visibility of button `OK`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Visibility OkButtonVisibility
         {
             get
@@ -136,6 +196,12 @@ namespace Plexdata.Dialogs.Internal
             }
         }
 
+        /// <summary>
+        /// Gets the visibility of button `Close`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Visibility CloseButtonVisibility
         {
             get
@@ -149,6 +215,12 @@ namespace Plexdata.Dialogs.Internal
             }
         }
 
+        /// <summary>
+        /// Gets the visibility of button `Cancel`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Visibility CancelButtonVisibility
         {
             get
@@ -162,6 +234,12 @@ namespace Plexdata.Dialogs.Internal
             }
         }
 
+        /// <summary>
+        /// Gets the visibility of button `Yes`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Visibility YesButtonVisibility
         {
             get
@@ -175,6 +253,12 @@ namespace Plexdata.Dialogs.Internal
             }
         }
 
+        /// <summary>
+        /// Gets the visibility of button `No`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Visibility NoButtonVisibility
         {
             get
@@ -192,6 +276,12 @@ namespace Plexdata.Dialogs.Internal
 
         #region Button labels
 
+        /// <summary>
+        /// Gets the label of button `OK`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public String OkButtonLabel
         {
             get
@@ -200,6 +290,12 @@ namespace Plexdata.Dialogs.Internal
             }
         }
 
+        /// <summary>
+        /// Gets the label of button `Close`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public String CloseButtonLabel
         {
             get
@@ -208,6 +304,12 @@ namespace Plexdata.Dialogs.Internal
             }
         }
 
+        /// <summary>
+        /// Gets the label of button `Cancel`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public String CancelButtonLabel
         {
             get
@@ -216,6 +318,12 @@ namespace Plexdata.Dialogs.Internal
             }
         }
 
+        /// <summary>
+        /// Gets the label of button `Yes`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public String YesButtonLabel
         {
             get
@@ -224,6 +332,12 @@ namespace Plexdata.Dialogs.Internal
             }
         }
 
+        /// <summary>
+        /// Gets the label of button `No`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public String NoButtonLabel
         {
             get
@@ -236,30 +350,60 @@ namespace Plexdata.Dialogs.Internal
 
         #region Button defaults
 
+        /// <summary>
+        /// Gets the default behaviour of button `OK`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Boolean OkButtonDefault
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the default behaviour of button `Close`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Boolean CloseButtonDefault
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the default behaviour of button `Cancel`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Boolean CancelButtonDefault
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the default behaviour of button `Yes`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Boolean YesButtonDefault
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the default behaviour of button `No`.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Boolean NoButtonDefault
         {
             get;
@@ -268,8 +412,96 @@ namespace Plexdata.Dialogs.Internal
 
         #endregion
 
+        #region Button cancels
+
+        /// <summary>
+        /// Gets the cancel behaviour of button `OK`. This 
+        /// property always returns false.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
+        public Boolean OkButtonCancel
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets the cancel behaviour of button `Cancel`. This 
+        /// property returns true if `Cancel` button is visible.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
+        public Boolean CancelButtonCancel
+        {
+            get
+            {
+                return this.CancelButtonVisibility == Visibility.Visible;
+            }
+        }
+
+        /// <summary>
+        /// Gets the cancel behaviour of button `Close`. This 
+        /// property returns true if `Close` button is visible 
+        /// and the `Cancel` button is invisible.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
+        public Boolean CloseButtonCancel
+        {
+            get
+            {
+                return this.CloseButtonVisibility == Visibility.Visible && !this.CancelButtonCancel;
+            }
+        }
+
+        /// <summary>
+        /// Gets the cancel behaviour of button `Yes`. This 
+        /// property always returns false.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
+        public Boolean YesButtonCancel
+        {
+            get
+            {
+                return false;
+            }
+
+        }
+
+        /// <summary>
+        /// Gets the cancel behaviour of button `No`. This property returns 
+        /// true if the `No` button is visible, and the `Cancel` button as 
+        /// well as the `Close` button are both invisible.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
+        public Boolean NoButtonCancel
+        {
+            get
+            {
+                return this.NoButtonVisibility == Visibility.Visible && !(this.CancelButtonCancel || this.CloseButtonCancel);
+            }
+        }
+
+        #endregion
+
         #region Link labels
 
+        /// <summary>
+        /// Gets the label of copy clipboard link.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public String CopyClipboardLabel
         {
             get
@@ -283,6 +515,12 @@ namespace Plexdata.Dialogs.Internal
 
         #region Protected overrides
 
+        /// <summary>
+        /// Raises the source initialized event.
+        /// </summary>
+        /// <param name="args">
+        /// The event arguments containing the event data.
+        /// </param>
         protected override void OnSourceInitialized(EventArgs args)
         {
             base.OnSourceInitialized(args);
