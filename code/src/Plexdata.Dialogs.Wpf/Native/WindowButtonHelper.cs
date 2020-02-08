@@ -1,26 +1,26 @@
 ﻿/*
-* MIT License
-* 
-* Copyright (c) 2020 plexdata.de
-* 
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-* SOFTWARE.
-*/
+ * MIT License
+ * 
+ * Copyright (c) 2020 plexdata.de
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
 using System;
 using System.Runtime.InteropServices;
@@ -29,10 +29,27 @@ using System.Windows.Interop;
 
 namespace Plexdata.Dialogs.Native
 {
+    /// <summary>
+    /// The static helper class to allow the modification of the window button 
+    /// `Minimize` and `Maximize`.
+    /// </summary>
     public static class WindowButtonHelper
     {
         #region Public methods
 
+        /// <summary>
+        /// Enables or disables the `Minimize` and `Maximize` buttons for provided 
+        /// window.
+        /// </summary>
+        /// <param name="window">
+        /// The window to modify those buttons for.
+        /// </param>
+        /// <param name="disabled">
+        /// True to disable those buttons and false to enable them.
+        /// </param>
+        /// <returns>
+        /// True it the Win32 API call was successful and false otherwise.
+        /// </returns>
         public static Boolean SetAdditionalButtons(Window window, Boolean disabled)
         {
             if (window is null)
@@ -52,6 +69,18 @@ namespace Plexdata.Dialogs.Native
             }
         }
 
+        /// <summary>
+        /// Enables or disables the `Minimize` button for provided window.
+        /// </summary>
+        /// <param name="window">
+        /// The window to modify this button for.
+        /// </param>
+        /// <param name="disabled">
+        /// True to disable this button and false to enable it.
+        /// </param>
+        /// <returns>
+        /// True it the Win32 API call was successful and false otherwise.
+        /// </returns>
         public static Boolean SetMinimizeButton(Window window, Boolean disabled)
         {
             if (window is null)
@@ -71,6 +100,18 @@ namespace Plexdata.Dialogs.Native
             }
         }
 
+        /// <summary>
+        /// Enables or disables the `Maximize` button for provided window.
+        /// </summary>
+        /// <param name="window">
+        /// The window to modify this button for.
+        /// </param>
+        /// <param name="disabled">
+        /// True to disable this button and false to enable it.
+        /// </param>
+        /// <returns>
+        /// True it the Win32 API call was successful and false otherwise.
+        /// </returns>
         public static Boolean SetMaximizeButton(Window window, Boolean disabled)
         {
             if (window is null)

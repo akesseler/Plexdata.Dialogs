@@ -42,39 +42,84 @@
                         <Run Text="{Binding CopyClipboardLabel, Mode=OneWay}" />
                     </Hyperlink>
                 </TextBlock>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
-                    <Button Margin="5,0,0,0" Width="70" Visibility="{Binding OkButtonVisibility}" Content="{Binding OkButtonLabel}" Click="OnOkButtonClick" />
-                    <Button Margin="5,0,0,0" Width="70" Visibility="{Binding YesButtonVisibility}" Content="{Binding YesButtonLabel}" Click="OnYesButtonClick" />
-                    <Button Margin="5,0,0,0" Width="70" Visibility="{Binding NoButtonVisibility}" Content="{Binding NoButtonLabel}" Click="OnNoButtonClick" />
-                    <Button Margin="5,0,0,0" Width="70" Visibility="{Binding CloseButtonVisibility}" Content="{Binding CloseButtonLabel}" IsCancel="True" Click="OnCloseButtonClick" />
-                    <Button Margin="5,0,0,0" Width="70" Visibility="{Binding CancelButtonVisibility}" Content="{Binding CancelButtonLabel}" IsCancel="True" Click="OnCancelButtonClick" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button 
+                        TabIndex="0" 
+                        Margin="5,0,0,0" 
+                        Width="70" 
+                        Visibility="{Binding OkButtonVisibility}"
+                        Content="{Binding OkButtonLabel}"
+                        IsDefault="{Binding OkButtonDefault}"
+                        IsCancel="{Binding OkButtonCancel}"
+                        Click="OnOkButtonClick" />
+                    <Button 
+                        TabIndex="1" 
+                        Margin="5,0,0,0" 
+                        Width="70" 
+                        Visibility="{Binding YesButtonVisibility}"
+                        Content="{Binding YesButtonLabel}"
+                        IsDefault="{Binding YesButtonDefault}"
+                        IsCancel="{Binding YesButtonCancel}"
+                        Click="OnYesButtonClick" />
+                    <Button 
+                        TabIndex="2" 
+                        Margin="5,0,0,0" 
+                        Width="70" 
+                        Visibility="{Binding NoButtonVisibility}"
+                        Content="{Binding NoButtonLabel}"
+                        IsDefault="{Binding NoButtonDefault}"
+                        IsCancel="{Binding NoButtonCancel}"
+                        Click="OnNoButtonClick" />
+                    <Button 
+                        TabIndex="3" 
+                        Margin="5,0,0,0" 
+                        Width="70" 
+                        Visibility="{Binding CloseButtonVisibility}"
+                        Content="{Binding CloseButtonLabel}"
+                        IsDefault="{Binding CloseButtonDefault}"
+                        IsCancel="{Binding CloseButtonCancel}"
+                        Click="OnCloseButtonClick" />
+                    <Button 
+                        TabIndex="4" 
+                        Margin="5,0,0,0" 
+                        Width="70" 
+                        Visibility="{Binding CancelButtonVisibility}" 
+                        Content="{Binding CancelButtonLabel}" 
+                        IsDefault="{Binding CancelButtonDefault}" 
+                        IsCancel="{Binding CancelButtonCancel}" 
+                        Click="OnCancelButtonClick" />
                 </StackPanel>
             </Grid>
         </Border>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Image 
-                Grid.Row="0" 
-                Grid.Column="0" 
-                Width="32" 
-                Height="32" 
-                Margin="25,25,0,25"
-                VerticalAlignment="Top" 
-                HorizontalAlignment="Center" 
-                Visibility="{Binding SymbolVisibility}"
-                Source="{Binding Symbol, Mode=OneWay}" />
-            <TextBlock 
-                Grid.Row="0" 
-                Grid.Column="1" 
-                Margin="25,25,25,25"
-                TextWrapping="WrapWithOverflow"
-                Text="{Binding Message, Mode=OneWay}" />
-        </Grid>
+        <ScrollViewer
+            CanContentScroll="True"
+            VerticalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Disabled">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image 
+                    Grid.Row="0" 
+                    Grid.Column="0" 
+                    Width="32" 
+                    Height="32" 
+                    Margin="25,25,0,25"
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Center" 
+                    Visibility="{Binding SymbolVisibility}"
+                    Source="{Binding Symbol, Mode=OneWay}" />
+                <TextBlock 
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Margin="25,25,25,25"
+                    TextWrapping="WrapWithOverflow"
+                    Text="{Binding Message, Mode=OneWay}" />
+            </Grid>
+        </ScrollViewer>
     </DockPanel>
 </Window>

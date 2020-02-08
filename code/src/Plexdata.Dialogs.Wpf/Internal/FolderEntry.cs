@@ -33,18 +33,24 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Plexdata.Dialogs
+namespace Plexdata.Dialogs.Internal
 {
+    /// <summary>
+    /// This helper class is intended to be used internally only.
+    /// </summary>
     public class FolderEntry : INotifyPropertyChanged
     {
         #region Static fields
 
-        public readonly static FolderEntry DummyEntry = new FolderEntry();
+        private readonly static FolderEntry DummyEntry = new FolderEntry();
 
         #endregion
 
         #region Public events
 
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
@@ -66,6 +72,13 @@ namespace Plexdata.Dialogs
             this.children = new ObservableCollection<FolderEntry>(Enumerable.Repeat(FolderEntry.DummyEntry, 1));
         }
 
+        /// <summary>
+        /// The constructor using provided <paramref name="drive"/> to initialize all 
+        /// dependent data from.
+        /// </summary>
+        /// <param name="drive">
+        /// The drive to initialize all dependent data from.
+        /// </param>
         public FolderEntry(DriveInfo drive)
             : this(drive?.RootDirectory)
         {
@@ -79,6 +92,13 @@ namespace Plexdata.Dialogs
             }
         }
 
+        /// <summary>
+        /// The constructor using provided <paramref name="folder"/> to initialize all 
+        /// dependent data from.
+        /// </summary>
+        /// <param name="folder">
+        /// The folder to initialize all dependent data from.
+        /// </param>
         public FolderEntry(DirectoryInfo folder)
             : this()
         {
@@ -98,12 +118,36 @@ namespace Plexdata.Dialogs
 
         #region Public properties
 
+        /// <summary>
+        /// Gets the display label.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public String Label { get; private set; }
 
+        /// <summary>
+        /// Gets the assigned folder.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public DirectoryInfo Folder { get; private set; }
 
+        /// <summary>
+        /// Gets the assigned image.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public ImageSource Image { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the list of assigned children.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public ObservableCollection<FolderEntry> Children
         {
             get
@@ -120,9 +164,18 @@ namespace Plexdata.Dialogs
             }
         }
 
+        /// <summary>
+        /// Gets or sets current selected state.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Boolean IsSelected
         {
-            get { return this.selected; }
+            get
+            {
+                return this.selected;
+            }
             set
             {
                 if (value != this.selected)
@@ -133,9 +186,18 @@ namespace Plexdata.Dialogs
             }
         }
 
+        /// <summary>
+        /// Gets or sets current expanded state.
+        /// </summary>
+        /// <remarks>
+        /// This property should not be used directly.
+        /// </remarks>
         public Boolean IsExpanded
         {
-            get { return this.expanded; }
+            get
+            {
+                return this.expanded;
+            }
             set
             {
                 Boolean firing = false;
@@ -173,6 +235,12 @@ namespace Plexdata.Dialogs
 
         #region Public methods
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// The string that represents the current object.
+        /// </returns>
         public override String ToString()
         {
             return this.Folder is null ? this.Label : this.Folder.FullName;
@@ -182,6 +250,12 @@ namespace Plexdata.Dialogs
 
         #region Event handlers
 
+        /// <summary>
+        /// This method fires the property changed event if possible.
+        /// </summary>
+        /// <param name="property">
+        /// The name of the property that has changed.
+        /// </param>
         protected void OnPropertyChanged(String property)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
@@ -287,7 +361,7 @@ namespace Plexdata.Dialogs
         };
 
         [DllImport("user32.dll")]
-        public static extern Boolean DestroyIcon(IntPtr handle);
+        private static extern Boolean DestroyIcon(IntPtr handle);
 
         [DllImport("shell32.dll")]
         private static extern IntPtr SHGetFileInfo(String pszPath, UInt32 dwFileAttributes, ref SHFILEINFO psfi, UInt32 cbSizeFileInfo, UInt32 uFlags);

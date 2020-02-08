@@ -26,11 +26,57 @@ The _Dialog Box_ represents a simple replacement of the standard Windows message
 has been implemented because of the fact that in WPF the standard Windows message box looks pretty 
 ugly.
 
+### Examples
+
+This example demonstrates how to show the `DialogBox` in the simplest possible way.
+
+```
+DialogBox.Show(this, message);
+```
+
+This example demonstrates how to show the `DialogBox` with a symbol and different buttons.
+
+```
+DialogBox.Show(this, message, DialogSymbol.Information, DialogButton.OkCancel);
+```
+
+This example demonstrates how to show the `DialogBox` with selecting a different default button.
+
+```
+DialogBox.Show(this, message, DialogSymbol.Error, DialogButton.YesNoCancel, DialogOption.DefaultButtonNo);
+```
+
+Finally note, it is also possible to provide a user-defined caption as well as to apply other options 
+like customized button labels.
+
 ## Open Folder Dialog
 
 The _Open Folder Dialog_ instead represents a dialog window allowing users to choose a particular 
 directory. This dialog has been implemented because of the fact that such a dialog box does not 
 exist in WPF.
+
+### Examples
+
+This example demonstrates how to show the `OpenFolderDialog` in the simplest possible way.
+
+```
+OpenFolderDialog.Show(this);
+```
+
+This example demonstrates how to show the `OpenFolderDialog` with an additional message.
+
+```
+OpenFolderDialog.Show(this, message);
+```
+
+This example demonstrates how to show the `OpenFolderDialog` with an initial folder.
+
+```
+OpenFolderDialog.Show(this, new DirectoryInfo(@"C:\Users"));
+```
+
+Finally note, it is also possible to provide a user-defined caption as well as to provide both, 
+a message and an initial folder.
 
 # Library Usage
 

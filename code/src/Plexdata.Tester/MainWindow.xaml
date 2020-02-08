@@ -29,10 +29,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Plexdata.Tester"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Dialog Window Tester" 
+        Height="600" 
+        Width="500">
     <StackPanel 
         Margin="20,50,20,50">
-        <Button Click="OnShowMessageDialog">Show Message Dialog</Button>
-        <Button Click="OnShowOpenFolderDialog">Show Open Folder Dialog</Button>
+        <Button Margin="0,5" Click="OnShowDialogBoxSimple">Show Dialog Box (Simple)</Button>
+        <Button Margin="0,5" Click="OnShowDialogBoxOkCancel">Show Dialog Box (OkCancel)</Button>
+        <Button Margin="0,5" Click="OnShowDialogBoxOkCancelOkDefault">Show Dialog Box (OkCancel - OkDefault)</Button>
+        <Button Margin="0,5" Click="OnShowDialogBoxYesNoCancel">Show Dialog Box (YesNoCancel)</Button>
+        <Button Margin="0,5" Click="OnShowDialogBoxYesNoCancelNoDefault">Show Dialog Box (YesNoCancel - NoDefault)</Button>
+        <Button Margin="0,5" Click="OnShowOpenFolderDialogSimple">Show Open Folder Dialog (Simple)</Button>
+        <Button Margin="0,5" Click="OnShowOpenFolderDialogMessage">Show Open Folder Dialog (Message)</Button>
+        <Button Margin="0,5" Click="OnShowOpenFolderDialogFolder">Show Open Folder Dialog (Folder)</Button>
+        <Button Margin="0,5" Click="OnShowOpenFolderDialogComplex">Show Open Folder Dialog (Complex)</Button>
     </StackPanel>
 </Window>

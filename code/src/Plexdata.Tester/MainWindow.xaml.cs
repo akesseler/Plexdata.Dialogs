@@ -24,6 +24,7 @@
 
 using Plexdata.Dialogs;
 using System;
+using System.IO;
 using System.Windows;
 
 namespace Plexdata.Tester
@@ -33,14 +34,9 @@ namespace Plexdata.Tester
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        #region Privates
 
-        private void OnShowMessageDialog(Object sender, RoutedEventArgs args)
-        {
-            String message = @"
+        private readonly String message = @"
 This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. 
 This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. 
 This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. 
@@ -64,21 +60,57 @@ This is a very long message. This is a very long message. This is a very long me
 This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. This is a very long message. 
 ".Replace(Environment.NewLine, String.Empty);
 
+        #endregion
+
+        public MainWindow()
+            : base()
+        {
+            this.InitializeComponent();
+        }
+
+        private void OnShowDialogBoxSimple(Object sender, RoutedEventArgs args)
+        {
             DialogBox.Show(this, message);
         }
 
-        private void OnShowOpenFolderDialog(Object sender, RoutedEventArgs args)
+        private void OnShowDialogBoxOkCancel(Object sender, RoutedEventArgs args)
         {
-            OpenFolderDialog dialog = new OpenFolderDialog(this)
-            {
-                Message = "This is a pretty long message. This is a pretty long message. This is a pretty long message. This is a pretty long message. This is a pretty long message.",
-                InitialPath = @"C:\Windows"
-            };
+            DialogBox.Show(this, message, DialogSymbol.Information, DialogButton.OkCancel);
+        }
 
-            if (dialog.ShowDialog() == true)
-            {
-                DialogBox.Show(this, dialog.SelectedFolder.FullName);
-            }
+        private void OnShowDialogBoxOkCancelOkDefault(Object sender, RoutedEventArgs args)
+        {
+            DialogBox.Show(this, message, DialogSymbol.Warning, DialogButton.OkCancel, DialogOption.DefaultButtonOk);
+        }
+
+        private void OnShowDialogBoxYesNoCancel(Object sender, RoutedEventArgs args)
+        {
+            DialogBox.Show(this, message, DialogSymbol.Question, DialogButton.YesNoCancel);
+        }
+
+        private void OnShowDialogBoxYesNoCancelNoDefault(Object sender, RoutedEventArgs args)
+        {
+            DialogBox.Show(this, message, DialogSymbol.Error, DialogButton.YesNoCancel, DialogOption.DefaultButtonNo);
+        }
+
+        private void OnShowOpenFolderDialogSimple(Object sender, RoutedEventArgs args)
+        {
+            OpenFolderDialog.Show(this);
+        }
+
+        private void OnShowOpenFolderDialogMessage(Object sender, RoutedEventArgs args)
+        {
+            OpenFolderDialog.Show(this, this.message.Substring(0, this.message.Length / 3));
+        }
+
+        private void OnShowOpenFolderDialogFolder(Object sender, RoutedEventArgs args)
+        {
+            OpenFolderDialog.Show(this, new DirectoryInfo(@"C:\Users"));
+        }
+
+        private void OnShowOpenFolderDialogComplex(Object sender, RoutedEventArgs args)
+        {
+            OpenFolderDialog.Show(this, this.message.Substring(0, this.message.Length / 3), "Choose what ever you want!", new DirectoryInfo(@"C:\Users"));
         }
     }
 }
