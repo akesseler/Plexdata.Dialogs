@@ -1,0 +1,225 @@
+﻿<!--
+ * MIT License
+ * 
+ * Copyright (c) 2020 plexdata.de
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ -->
+
+<Window x:Class="Plexdata.Dialogs.Internal.ExceptionBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:Plexdata.Dialogs.Internal.Controls"
+        xmlns:converters="clr-namespace:Plexdata.Dialogs.Internal.Converters"
+        mc:Ignorable="d"
+        Title="Exception Details">
+    <Window.Resources>
+        <controls:HierarchicalListViewDefaults x:Key="HierarchicalListViewDefaults"/>
+        <converters:HierarchicalListViewConverter x:Key="HierarchicalListViewConverter"/>
+        <ControlTemplate 
+            x:Key="HierarchicalListViewItem" 
+            TargetType="TreeViewItem">
+            <StackPanel>
+                <Border
+                    x:Name="itemBorder"
+                    Padding="2,2,2,3"
+                    SnapsToDevicePixels="True"
+                    Background="Transparent">
+                    <GridViewRowPresenter
+                        Content="{TemplateBinding Header}"
+                        Columns="{Binding Columns, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:HierarchicalListView}}"/>
+                </Border>
+                <ItemsPresenter 
+                    x:Name="itemsPresenter" 
+                    Visibility="Collapsed"/>
+            </StackPanel>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsExpanded" Value="True">
+                    <Setter TargetName="itemsPresenter" Property="Visibility" Value="Visible"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="true">
+                    <Setter TargetName="itemBorder" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsSelected" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter TargetName="itemBorder" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                </MultiTrigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate 
+            x:Key="HierarchicalListItemExpander"
+            TargetType="{x:Type controls:HierarchicalListItemExpander}" >
+            <StackPanel 
+                x:Name="containerElement" 
+                Orientation="Horizontal"
+                VerticalAlignment="Center">
+                <FrameworkElement Width="{Binding RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource HierarchicalListViewConverter}}"/>
+                <ToggleButton 
+                    IsTabStop="False"
+                    VerticalAlignment="Center" 
+                    FocusVisualStyle="{x:Null}"
+                    Width="{Binding Source={StaticResource HierarchicalListViewDefaults}, Path=ExpanderWidth}" 
+                    Height="{Binding Source={StaticResource HierarchicalListViewDefaults}, Path=ExpanderHeight}"
+                    Margin="{Binding Source={StaticResource HierarchicalListViewDefaults}, Path=ExpanderMargin}"
+                    IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeViewItem}}">
+                    <ToggleButton.Template>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border Background="Transparent">
+                                <Path 
+                                    x:Name="expanderSelector" 
+                                    Data="M 3,1 L 7,5 L 3,9 Z" 
+                                    Stretch="None" 
+                                    SnapsToDevicePixels="True" 
+                                    Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeViewItem}}" StrokeThickness="1" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Data" TargetName="expanderSelector" Value="M 8,3 L 8,8 L 3,8 Z" />
+                                    <Setter Property="Fill" TargetName="expanderSelector" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeViewItem}}" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="Data" TargetName="expanderSelector" Value="M 3,1 L 7,5 L 3,9 Z" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </ToggleButton.Template>
+                </ToggleButton>
+            </StackPanel>
+            <ControlTemplate.Triggers>
+                <DataTrigger Binding="{Binding HasItems, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeViewItem}}" Value="False">
+                    <Setter TargetName="containerElement" Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style TargetType="{x:Type controls:HierarchicalListView}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type controls:HierarchicalListView}">
+                        <ControlTemplate.Resources>
+                            <Style TargetType="TreeViewItem">
+                                <Setter Property="Template" Value="{StaticResource HierarchicalListViewItem}"/>
+                            </Style>
+                            <Style TargetType="controls:HierarchicalListItemExpander">
+                                <Setter Property="Template" Value="{StaticResource HierarchicalListItemExpander}"/>
+                                <Setter Property="IsTabStop" Value="False"/>
+                            </Style>
+                        </ControlTemplate.Resources>
+                        <Border 
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer 
+                                VerticalScrollBarVisibility="Auto"
+                                HorizontalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <GridViewHeaderRowPresenter 
+                                        Columns="{TemplateBinding Columns}"
+                                        AllowsColumnReorder="{TemplateBinding EnableColumnReorder}"/>
+                                    <StackPanel Grid.Row="1">
+                                        <ItemsPresenter />
+                                    </StackPanel>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Border
+            DockPanel.Dock="Bottom"
+            Padding="25,15"
+            Background="Transparent">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Margin="5,0,0,0" Width="70" Content="_Close" IsDefault="True" IsCancel="True" Click="OnCloseButtonClick"/>
+            </StackPanel>
+        </Border>
+        <DockPanel Margin="25,25,25,0">
+            <ScrollViewer
+                DockPanel.Dock="Top"
+                MaxHeight="100"
+                Margin="0,0,0,15"
+                VerticalScrollBarVisibility="Auto" 
+                Visibility="{Binding IsMessageVisible, Mode=OneWay}">
+                <TextBlock 
+                    TextWrapping="WrapWithOverflow"
+                    Text="{Binding Message, Mode=OneWay}"/>
+            </ScrollViewer>
+            <Border
+                BorderThickness="1"
+                BorderBrush="LightGray">
+                <controls:HierarchicalListView 
+                    x:Name="treeView"
+                    FocusVisualStyle="{x:Null}"
+                    EnableColumnReorder="False">
+                    <controls:HierarchicalListView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Elements}" />
+                    </controls:HierarchicalListView.ItemTemplate>
+                    <controls:HierarchicalListView.Columns>
+                        <GridViewColumn Header="Name" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="LightGray" BorderThickness=".5" Margin="-9,-3,-5,-3" Padding="7,5">
+                                        <StackPanel Orientation="Horizontal">
+                                            <controls:HierarchicalListItemExpander VerticalAlignment="Top"/>
+                                            <TextBlock Text="{Binding Name}" TextAlignment="Left"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Value" Width="400">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="LightGray" BorderThickness=".5" Margin="-8,-3,-5,-3" Padding="7,5">
+                                        <TextBlock Text="{Binding Value}" TextAlignment="Left"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Type" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="LightGray" BorderThickness=".5" Margin="-8,-3,-5,-3" Padding="7,5">
+                                        <TextBlock Text="{Binding Type}" TextAlignment="Left"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </controls:HierarchicalListView.Columns>
+                </controls:HierarchicalListView>
+            </Border>
+        </DockPanel>
+    </DockPanel>
+</Window>

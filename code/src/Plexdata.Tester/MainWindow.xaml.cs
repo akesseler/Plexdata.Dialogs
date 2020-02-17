@@ -24,6 +24,9 @@
 
 using Plexdata.Dialogs;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 
@@ -66,6 +69,30 @@ This is a very long message. This is a very long message. This is a very long me
             : base()
         {
             this.InitializeComponent();
+        }
+
+        private void OnShowExceptionBoxSimple(Object sender, RoutedEventArgs args)
+        {
+            try
+            {
+                new ExceptionBoxTest();
+            }
+            catch (Exception exception)
+            {
+                ExceptionBox.Show(this, exception);
+            }
+        }
+
+        private void OnShowExceptionBoxMessage(Object sender, RoutedEventArgs args)
+        {
+            try
+            {
+                new ExceptionBoxTest();
+            }
+            catch (Exception exception)
+            {
+                ExceptionBox.Show(this, exception, this.message.Substring(0, this.message.Length / 7));
+            }
         }
 
         private void OnShowDialogBoxSimple(Object sender, RoutedEventArgs args)
@@ -112,5 +139,77 @@ This is a very long message. This is a very long message. This is a very long me
         {
             OpenFolderDialog.Show(this, this.message.Substring(0, this.message.Length / 3), "Choose what ever you want!", new DirectoryInfo(@"C:\Users"));
         }
+
+        #region Exception dialog box test and helper classes.
+
+        private class ExceptionBoxTest
+        {
+            public ExceptionBoxTest()
+            {
+                this.Initialize();
+            }
+
+            public void Initialize()
+            {
+                this.InitializeInternal();
+            }
+
+            public void InitializeInternal()
+            {
+                this.RaiseTestException();
+            }
+
+            [Description("For the moment, only the count of \"Custom Attributes\" is determined.")]
+            private void RaiseTestException()
+            {
+                try
+                {
+                    this.RaiseInnerTestException();
+                }
+                catch (Exception exception)
+                {
+                    throw new ArgumentOutOfRangeException("Test exception level 1.", exception);
+                }
+            }
+
+            private void RaiseInnerTestException()
+            {
+                throw new TestHelperException("Test exception level 2.",
+                    new InvalidOperationException("Test exception level 3.",
+                        new SystemException("Test exception level 4.",
+                            new IndexOutOfRangeException("Test exception level 5.",
+                                new ArithmeticException("Test exception level 6.",
+                                    new ArgumentOutOfRangeException("parameter-name", "actual-value", "Test exception level 7.")
+                                )
+                            )
+                        )
+                    )
+                );
+            }
+        }
+
+        public class TestHelperException : Exception
+        {
+            private IDictionary<String, Object> data = new Dictionary<String, Object>();
+
+            public TestHelperException(String message, Exception innerException)
+                : base(message, innerException)
+            {
+                data.Add(new KeyValuePair<String, Object>("integer", 42));
+                data.Add(new KeyValuePair<String, Object>("string", "this is a string"));
+                data.Add(new KeyValuePair<String, Object>("flag-set", FileAttributes.Archive | FileAttributes.Directory | FileAttributes.ReadOnly | FileAttributes.Offline));
+                base.HelpLink = "http://example.org";
+            }
+
+            public override IDictionary Data
+            {
+                get
+                {
+                    return this.data as IDictionary;
+                }
+            }
+        }
+
+        #endregion
     }
 }

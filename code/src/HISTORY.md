@@ -1,5 +1,8 @@
 
 
+**1.0.2**
+- Introduction of an exception dialog box.
+
 **1.0.1**
 
 - Support of default buttons for class `DialogBox`.

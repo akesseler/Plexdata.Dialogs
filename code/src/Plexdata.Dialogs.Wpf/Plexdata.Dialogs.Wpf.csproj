@@ -57,11 +57,20 @@
     <Compile Include="DialogOption.cs" />
     <Compile Include="DialogResult.cs" />
     <Compile Include="DialogSymbol.cs" />
+    <Compile Include="ExceptionBox.cs" />
+    <Compile Include="Internal\Controls\HierarchicalListItemExpander.cs" />
+    <Compile Include="Internal\Controls\HierarchicalListView.cs" />
+    <Compile Include="Internal\Controls\HierarchicalListViewDefaults.cs" />
+    <Compile Include="Internal\Converters\HierarchicalListViewConverter.cs" />
+    <Compile Include="Internal\ExceptionBox.xaml.cs">
+      <DependentUpon>ExceptionBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Internal\FolderEntry.cs" />
     <Compile Include="Internal\DefaultButtonLabels.cs" />
     <Compile Include="Internal\DialogBox.xaml.cs">
       <DependentUpon>DialogBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Internal\Models\ExceptionEntry.cs" />
     <Compile Include="Native\WindowButtonHelper.cs" />
     <Compile Include="Internal\OpenFolderDialog.xaml.cs">
       <DependentUpon>OpenFolderDialog.xaml</DependentUpon>
@@ -74,6 +83,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="Internal\DialogBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Internal\ExceptionBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
