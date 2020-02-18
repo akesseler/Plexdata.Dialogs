@@ -78,6 +78,42 @@ OpenFolderDialog.Show(this, new DirectoryInfo(@"C:\Users"));
 Finally note, it is also possible to provide a user-defined caption as well as to provide both, 
 a message and an initial folder.
 
+## Exception Box
+
+The _Exception Box_ represents a dialog window allowing users to show exceptions with more details.
+Main feature of this dialog box is that inner exceptions can be expanded to bring their details into 
+view. 
+
+### Examples
+
+This example demonstrates how to show the `ExceptionBox` in the simplest possible way.
+
+```
+try
+{
+    throw new NotSupportedException();
+}
+catch (Exception exception)
+{
+    ExceptionBox.Show(this, exception);
+}
+```
+
+This example demonstrates how to show the `ExceptionBox` with an additional message.
+
+```
+try
+{
+    throw new NotSupportedException();
+}
+catch (Exception exception)
+{
+    ExceptionBox.Show(this, exception, "An exception occurred unexpectedly.");
+}
+```
+
+Finally please note, the caption of the dialog box can be changed as well.
+
 # Library Usage
 
 **First Way**

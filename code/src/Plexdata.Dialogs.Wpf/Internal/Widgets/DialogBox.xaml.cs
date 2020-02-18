@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+using Plexdata.Dialogs.Internal.Defaults;
 using Plexdata.Dialogs.Native;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 
-namespace Plexdata.Dialogs.Internal
+namespace Plexdata.Dialogs.Internal.Widgets
 {
     /// <summary>
     /// Interaction logic for DialogBox.xaml
@@ -39,7 +40,7 @@ namespace Plexdata.Dialogs.Internal
     /// <remarks>
     /// This class is intended to be used internally only.
     /// </remarks>
-    public partial class DialogBox : Window
+    internal partial class DialogBox : Window
     {
         #region Private fields
 

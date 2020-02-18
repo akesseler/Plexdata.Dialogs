@@ -22,12 +22,13 @@
  * SOFTWARE.
  -->
 
-<Window x:Class="Plexdata.Dialogs.Internal.OpenFolderDialog"
+<Window x:Class="Plexdata.Dialogs.Internal.Widgets.OpenFolderDialog"
+        x:ClassModifier="internal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Plexdata.Dialogs.Internal"
+        xmlns:models="clr-namespace:Plexdata.Dialogs.Internal.Models"
         mc:Ignorable="d"
         Title="Open Folder">
     <DockPanel>
@@ -58,7 +59,7 @@
                 ItemsSource="{Binding RootFolders}"
                 BorderBrush="LightGray">
                 <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate DataType="{x:Type local:FolderEntry}" ItemsSource="{Binding Children}">
+                    <HierarchicalDataTemplate DataType="{x:Type models:FolderEntry}" ItemsSource="{Binding Children}">
                         <StackPanel Orientation="Horizontal" Margin="2">
                             <Image Source="{Binding Image, Mode=OneWay}" Margin="0,0,5,0"  />
                             <TextBlock Text="{Binding Label, Mode=OneWay}" Margin="0,0,4,0" />

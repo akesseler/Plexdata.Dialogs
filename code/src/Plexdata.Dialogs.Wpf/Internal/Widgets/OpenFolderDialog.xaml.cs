@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+using Plexdata.Dialogs.Internal.Models;
 using Plexdata.Dialogs.Native;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Plexdata.Dialogs.Internal
+namespace Plexdata.Dialogs.Internal.Widgets
 {
     /// <summary>
     /// Interaction logic for OpenFolderDialog.xaml
@@ -40,7 +41,7 @@ namespace Plexdata.Dialogs.Internal
     /// <remarks>
     /// This class is intended to be used internally only.
     /// </remarks>
-    public partial class OpenFolderDialog : Window
+    internal partial class OpenFolderDialog : Window
     {
         #region Private fields
 

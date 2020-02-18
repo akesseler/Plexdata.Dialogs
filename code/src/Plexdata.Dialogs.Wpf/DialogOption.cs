@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-using Plexdata.Dialogs.Internal;
+using Plexdata.Dialogs.Internal.Defaults;
 using System;
 
 namespace Plexdata.Dialogs

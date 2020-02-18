@@ -30,18 +30,45 @@
         xmlns:local="clr-namespace:Plexdata.Tester"
         mc:Ignorable="d"
         Title="Dialog Window Tester" 
-        Height="600" 
+        Height="700" 
         Width="500">
-    <StackPanel 
-        Margin="20,50,20,50">
-        <Button Margin="0,5" Click="OnShowDialogBoxSimple">Show Dialog Box (Simple)</Button>
-        <Button Margin="0,5" Click="OnShowDialogBoxOkCancel">Show Dialog Box (OkCancel)</Button>
-        <Button Margin="0,5" Click="OnShowDialogBoxOkCancelOkDefault">Show Dialog Box (OkCancel - OkDefault)</Button>
-        <Button Margin="0,5" Click="OnShowDialogBoxYesNoCancel">Show Dialog Box (YesNoCancel)</Button>
-        <Button Margin="0,5" Click="OnShowDialogBoxYesNoCancelNoDefault">Show Dialog Box (YesNoCancel - NoDefault)</Button>
-        <Button Margin="0,5" Click="OnShowOpenFolderDialogSimple">Show Open Folder Dialog (Simple)</Button>
-        <Button Margin="0,5" Click="OnShowOpenFolderDialogMessage">Show Open Folder Dialog (Message)</Button>
-        <Button Margin="0,5" Click="OnShowOpenFolderDialogFolder">Show Open Folder Dialog (Folder)</Button>
-        <Button Margin="0,5" Click="OnShowOpenFolderDialogComplex">Show Open Folder Dialog (Complex)</Button>
-    </StackPanel>
+    <ScrollViewer
+        VerticalScrollBarVisibility="Auto"
+        HorizontalScrollBarVisibility="Disabled">
+        <StackPanel 
+            Margin="20,50,20,50">
+            <GroupBox 
+                Margin="0,10"
+                Header="Exception Boxes">
+                <StackPanel
+                    Margin="10">
+                    <Button Margin="0,5" Click="OnShowExceptionBoxSimple">Show Exception Box (Simple)</Button>
+                    <Button Margin="0,5" Click="OnShowExceptionBoxMessage">Show Exception Box (Message)</Button>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+                Margin="0,10"
+                Header="Dialog Boxes">
+                <StackPanel
+                    Margin="10">
+                    <Button Margin="0,5" Click="OnShowDialogBoxSimple">Show Dialog Box (Simple)</Button>
+                    <Button Margin="0,5" Click="OnShowDialogBoxOkCancel">Show Dialog Box (OkCancel)</Button>
+                    <Button Margin="0,5" Click="OnShowDialogBoxOkCancelOkDefault">Show Dialog Box (OkCancel - Default: Ok)</Button>
+                    <Button Margin="0,5" Click="OnShowDialogBoxYesNoCancel">Show Dialog Box (YesNoCancel)</Button>
+                    <Button Margin="0,5" Click="OnShowDialogBoxYesNoCancelNoDefault">Show Dialog Box (YesNoCancel - Default: No)</Button>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+                Margin="0,10"
+                Header="Open Folder Dialogs">
+                <StackPanel
+                    Margin="10">
+                    <Button Margin="0,5" Click="OnShowOpenFolderDialogSimple">Show Open Folder Dialog (Simple)</Button>
+                    <Button Margin="0,5" Click="OnShowOpenFolderDialogMessage">Show Open Folder Dialog (Message)</Button>
+                    <Button Margin="0,5" Click="OnShowOpenFolderDialogFolder">Show Open Folder Dialog (Folder)</Button>
+                    <Button Margin="0,5" Click="OnShowOpenFolderDialogComplex">Show Open Folder Dialog (Complex)</Button>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </ScrollViewer>
 </Window>

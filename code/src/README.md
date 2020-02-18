@@ -20,4 +20,10 @@ Nothing known at the moment.
 
 ## Known Issues
 
-Nothing known at the moment.
+Under some circumstances the `ExceptionBox` scrolls its content in an unusual behavior. The reason 
+behind, the base tree view scrolls their selected items "into view" with the effect that the current 
+selection "jumps". At the moment, there is no way know to fix this behavior. Another issue is the fact 
+that scrolling down brings the header out of view. These issues might be fixed in a later version.
+
+Under some circumstances the `OpenFolderDialog` hangs when a huge directory (e.g. `C:\Windows`) is going 
+to open. And unfortunately no idea why, at the moment.
