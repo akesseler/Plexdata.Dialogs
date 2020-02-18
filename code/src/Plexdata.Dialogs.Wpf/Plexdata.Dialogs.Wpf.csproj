@@ -62,17 +62,17 @@
     <Compile Include="Internal\Controls\HierarchicalListView.cs" />
     <Compile Include="Internal\Controls\HierarchicalListViewDefaults.cs" />
     <Compile Include="Internal\Converters\HierarchicalListViewConverter.cs" />
-    <Compile Include="Internal\ExceptionBox.xaml.cs">
+    <Compile Include="Internal\Widgets\ExceptionBox.xaml.cs">
       <DependentUpon>ExceptionBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Internal\FolderEntry.cs" />
-    <Compile Include="Internal\DefaultButtonLabels.cs" />
-    <Compile Include="Internal\DialogBox.xaml.cs">
+    <Compile Include="Internal\Models\FolderEntry.cs" />
+    <Compile Include="Internal\Defaults\DefaultButtonLabels.cs" />
+    <Compile Include="Internal\Widgets\DialogBox.xaml.cs">
       <DependentUpon>DialogBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Internal\Models\ExceptionEntry.cs" />
     <Compile Include="Native\WindowButtonHelper.cs" />
-    <Compile Include="Internal\OpenFolderDialog.xaml.cs">
+    <Compile Include="Internal\Widgets\OpenFolderDialog.xaml.cs">
       <DependentUpon>OpenFolderDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="OpenFolderDialog.cs" />
@@ -82,15 +82,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Page Include="Internal\DialogBox.xaml">
+    <Page Include="Internal\Widgets\DialogBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Internal\ExceptionBox.xaml">
+    <Page Include="Internal\Widgets\ExceptionBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Internal\OpenFolderDialog.xaml">
+    <Page Include="Internal\Widgets\OpenFolderDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

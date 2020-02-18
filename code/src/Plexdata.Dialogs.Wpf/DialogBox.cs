@@ -617,7 +617,7 @@ namespace Plexdata.Dialogs
         {
             Mouse.OverrideCursor = null;
 
-            Internal.DialogBox dialog = new Internal.DialogBox(owner, message, caption, buttons, symbol, options);
+            Internal.Widgets.DialogBox dialog = new Internal.Widgets.DialogBox(owner, message, caption, buttons, symbol, options);
 
             dialog.ShowDialog();
 

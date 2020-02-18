@@ -25,7 +25,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Plexdata.Dialogs.Internal
+namespace Plexdata.Dialogs.Internal.Defaults
 {
     internal static class DefaultButtonLabels
     {

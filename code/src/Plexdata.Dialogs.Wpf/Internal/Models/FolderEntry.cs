@@ -33,12 +33,12 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Plexdata.Dialogs.Internal
+namespace Plexdata.Dialogs.Internal.Models
 {
     /// <summary>
     /// This helper class is intended to be used internally only.
     /// </summary>
-    public class FolderEntry : INotifyPropertyChanged
+    internal class FolderEntry : INotifyPropertyChanged
     {
         #region Static fields
 

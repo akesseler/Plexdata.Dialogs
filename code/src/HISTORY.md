@@ -2,6 +2,10 @@
 
 **1.0.2**
 - Introduction of an exception dialog box.
+- Refactoring of internal namespace structure.
+- Visibility of all widgets reduced to internal.
+- Version number increased.
+- Published on _GitHub_.
 
 **1.0.1**
 

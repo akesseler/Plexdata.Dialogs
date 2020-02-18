@@ -140,7 +140,7 @@ namespace Plexdata.Dialogs
         /// </param>
         public static void Show(Window owner, Exception exception, String message, String caption)
         {
-            Internal.ExceptionBox dialog = new Internal.ExceptionBox(owner, exception, message, caption);
+            Internal.Widgets.ExceptionBox dialog = new Internal.Widgets.ExceptionBox(owner, exception, message, caption);
             dialog.ShowDialog();
         }
     }

@@ -28,9 +28,9 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace Plexdata.Dialogs.Internal
+namespace Plexdata.Dialogs.Internal.Widgets
 {
-    partial class ExceptionBox : Window
+    internal partial class ExceptionBox : Window
     {
         // TODO: Implement some kind of "copy to clipboard" functionality.
 

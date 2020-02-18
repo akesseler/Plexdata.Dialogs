@@ -295,7 +295,7 @@ namespace Plexdata.Dialogs
         {
             Mouse.OverrideCursor = null;
 
-            Internal.OpenFolderDialog dialog = new Internal.OpenFolderDialog(owner, message, caption, folder);
+            Internal.Widgets.OpenFolderDialog dialog = new Internal.Widgets.OpenFolderDialog(owner, message, caption, folder);
 
             if (dialog.ShowDialog() == true)
             {

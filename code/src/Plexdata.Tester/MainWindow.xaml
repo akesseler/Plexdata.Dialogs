@@ -53,9 +53,9 @@
                     Margin="10">
                     <Button Margin="0,5" Click="OnShowDialogBoxSimple">Show Dialog Box (Simple)</Button>
                     <Button Margin="0,5" Click="OnShowDialogBoxOkCancel">Show Dialog Box (OkCancel)</Button>
-                    <Button Margin="0,5" Click="OnShowDialogBoxOkCancelOkDefault">Show Dialog Box (OkCancel - OkDefault)</Button>
+                    <Button Margin="0,5" Click="OnShowDialogBoxOkCancelOkDefault">Show Dialog Box (OkCancel - Default: Ok)</Button>
                     <Button Margin="0,5" Click="OnShowDialogBoxYesNoCancel">Show Dialog Box (YesNoCancel)</Button>
-                    <Button Margin="0,5" Click="OnShowDialogBoxYesNoCancelNoDefault">Show Dialog Box (YesNoCancel - NoDefault)</Button>
+                    <Button Margin="0,5" Click="OnShowDialogBoxYesNoCancelNoDefault">Show Dialog Box (YesNoCancel - Default: No)</Button>
                 </StackPanel>
             </GroupBox>
             <GroupBox
